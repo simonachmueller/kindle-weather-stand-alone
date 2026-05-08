@@ -41,7 +41,7 @@ while true
 do
     # Enable WiFi
     /usr/bin/lipc-set-prop com.lab126.wifid enable 1
-    sleep 30
+    sleep 60
     
     # Update weather
     ./weather-manager.sh
