@@ -19,10 +19,7 @@ __Please notice that__ this project is only tested on __Kindle 4 Silver Non-touc
    - You need to install [Kindle Python](https://www.mobileread.com/forums/showthread.php?t=88004) via [MR Package Installer](https://www.mobileread.com/forums/showthread.php?t=251143) or System Update
      - The Kindle Python package for Kindle 4 is `kindle-python-0.14.N-k4.zip` 
    - You need an extra Python library ([pytz](https://pypi.org/project/pytz/)) but it can be installed with a script within this project
- - A weather API key (free tier is more than enough for single device usage)
-   - [Dark Sky API](https://darksky.net/dev) (Recommended, fully supported)
-   - [OpenWeatherMap API](https://openweathermap.org/api) (Not recommended, limited in daily forecast)
-   - More to come...
+ - An [OpenWeatherMap API](https://openweathermap.org/api) key (free tier is more than enough for single device usage)
  - A pair of [Pushover](https://pushover.net/) user key and app key (optional, will be able to send notification when Kindle is out of charge)
  - Almost forget... You're gonna need an Internet connection (hello?)
 
@@ -45,8 +42,7 @@ My bad and sincerely apologise :P Here's a more detailed guide:
 2. Open KAUL, you should see a new program called *Kindle Weather Stand Dependicies Checker*. Run it to check your Python installation. It will also install pytz library if not present (Internet connection required)
 3. Update configurations and credentials
 	1. (Optional) Open ``/extensions/weather-stand/bin/weather-manager.sh`` and replace Pushover credentials as instructed
-	2. (Optional) Open ``/extensions/weather-stand/bin/weather-generator.sh`` and choose which weather API you want to use as instructed
-	3. Open ``/extensions/weather-stand/bin/weather-generator-[your-weather-api-name-here].py`` and replace your API key, location and other configurations as instructed
+	2. Open ``/extensions/weather-stand/bin/weather-generator-openweathermap.py`` and replace your API key, location and other configurations as instructed
 4. __Important!__ Delete ``/extensions/weather-stand/bin/disable`` file
    - This file is a kill switch. The script won't carry on if it presents
 5. (Optional) Run ``/extensions/weather-stand/bin/weather-manager.sh`` from a terminal (SSH?) to retrieve weather information. Make sure there's no error occurs
@@ -59,8 +55,7 @@ My bad and sincerely apologise :P Here's a more detailed guide:
    - *weather-stand* contains the weather stand program
      - *start.sh* contains the main loop, if you want to change refresh frequency, it's inside this file
      - *weather-manager.sh* is the main control file, update Pushover notification credentials here
-     - *weather-generator.sh* is the loader of python script, you can choose which API to use here
-     - *weather-generator-darksky.py* uses [Dark Sky API](https://darksky.net/dev) to load weather data
+     - *weather-generator.sh* runs the OpenWeatherMap generator script
      - *weather-generator-openweathermap.py* uses [OpenWeatherMap API](https://openweathermap.org/api) to load weather data
    - *weather-stand-prerequisite* contains a program that checks python and required library installation
      - It will install the missing library ([pytz](https://pypi.org/project/pytz/)) if not present

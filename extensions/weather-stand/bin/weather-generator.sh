@@ -2,8 +2,7 @@
 
 cd "$(dirname "$0")"
 
-# Choose your favourite weather service
-#python weather-generator-darksky.py
+# Weather source
 python weather-generator-openweathermap.py
 
 # The script should output a svg file in tmp directory, check before conversion

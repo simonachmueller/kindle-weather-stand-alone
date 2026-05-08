@@ -45,6 +45,12 @@
 	<g transform="scale(1.01) translate(246.535 593.000)"><use xlink:href="#VAR_DAILY_3_ICON"/></g>
 	<g transform="scale(1.01) translate(360.396 593.000)"><use xlink:href="#VAR_DAILY_4_ICON"/></g>
 	<g transform="scale(1.01) translate(474.257 593.000)"><use xlink:href="#VAR_DAILY_5_ICON"/></g>
+	<g id="battery-low-icon" style="VAR_BATTERY_ICON_STYLE" transform="translate(420,36) scale(0.62)">
+		<rect x="14" y="24" width="138" height="52" rx="6" ry="6" fill="none" stroke="black" stroke-width="8"/>
+		<rect x="154" y="39" width="14" height="22" rx="2" ry="2" fill="black"/>
+		<rect x="28" y="38" width="22" height="24" rx="2" ry="2" fill="black"/>
+		<path d="M96 32 L76 55 H91 L84 70 L108 46 H93 Z" fill="black"/>
+	</g>
 
 	<text style="text-anchor:left;" font-size="30px" x="17" y="46" >Today in VAR_LOCATION:</text>
 	<text style="text-anchor:end;" font-size="18px" x="582" y="37" >Updated at VAR_UPDATE_TIME</text>

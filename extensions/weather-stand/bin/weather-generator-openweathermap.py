@@ -1,5 +1,6 @@
 import codecs
 import json
+import os
 try:
     # For Python 3.0 and later
     from urllib.request import urlopen
@@ -217,6 +218,7 @@ weather_data = {
     'VAR_DAILY_5_LOW': int(round(forecast_daily[6]['temp_low'])),
     'VAR_PROVIDER_STRING': 'Powered by OpenWeatherMap',
     'VAR_BATTERY_CAPACITY': battery_capacity.read(),
+    'VAR_BATTERY_ICON_STYLE': 'display:inline' if os.environ.get('WEATHER_BATTERY_ALERT') == '1' else 'display:none',
     'VAR_VERSION': script_version
 }
 

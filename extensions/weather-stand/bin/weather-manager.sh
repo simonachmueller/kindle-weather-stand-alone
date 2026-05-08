@@ -38,9 +38,27 @@ if [ $BATTERY -le 5 ] && [ $CURRENT -le 0 ]; then
             "https://api.pushover.net/1/messages.json"
         fi
     fi
+elif [ $BATTERY -le 10 ] && [ $CURRENT -le 0 ]; then
+    # Low battery (but not critical): render weather with battery icon alert.
+    export WEATHER_BATTERY_ALERT=1
+    rm -f /tmp/weather-crushed.png
+    ping -c 5 www.microsoft.com
+    if [ $? -ne 0 ]; then
+        eips 0 38 '------------- NO INTERNET CONNECTION -------------'
+        exit
+    fi
+    ./weather-generator.sh
+    if [ $? -ne 0 ]; then
+        eips 0 38 '------------ COULD NOT UPDATE WEATHER ------------'
+    else
+        eips -c
+        eips -c
+        eips -g /mnt/debian/tmp/weather-crushed.png
+    fi
 else
     # Delete previously added flag
     if [ -e /tmp/weather-battery-drained.flag ]; then rm -f /tmp/weather-battery-drained.flag; fi
+    export WEATHER_BATTERY_ALERT=0
     # Get rid of old file first
     rm -f /tmp/weather-crushed.png
     # Test network status
