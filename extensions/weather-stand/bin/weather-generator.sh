@@ -2,6 +2,12 @@
 
 cd "$(dirname "$0")"
 
+if [ -f ./.env ]; then
+    . ./.env
+fi
+
+export OPENWEATHER_API_KEY
+
 # Weather source
 python weather-generator-openweathermap.py
 

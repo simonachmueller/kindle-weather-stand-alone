@@ -13,7 +13,7 @@ from datetime import datetime
 import pytz
 
 # Parameters
-weather_key = ''  # OpenWeatherMap API key
+weather_key = os.environ.get('OPENWEATHER_API_KEY', '')  # OpenWeatherMap API key
 location_string = 'Frankfurt,de'  # Location parameter, see below for details
 # You can search for location with following ways:
 # - By city name: city name and country code divided by comma, use ISO 3166 country codes. e.g. 'q=London,uk'

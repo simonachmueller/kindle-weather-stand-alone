@@ -10,6 +10,8 @@ PO_USER=""
 
 cd "$(dirname "$0")"
 
+EIPS=/usr/sbin/eips
+
 # Quit when detect a disable flag
 if [ -e disable ]; then exit 0; fi
 
@@ -24,7 +26,7 @@ if [ $BATTERY -le 5 ] && [ $CURRENT -le 0 ]; then
     else
         touch /tmp/weather-battery-drained.flag
         # If device just got low power, then show charge message. 
-        eips 0 38 '--------------- CHARGE BATTERY NOW ---------------'
+        $EIPS 0 38 '--------------- CHARGE BATTERY NOW ---------------'
         # Send a push notification for battery low
         if [ ! -z $PO_TOKEN ] && [ ! -z $PO_USER ]; then
             RESULT=`cat /sys/devices/system/luigi_battery/luigi_battery0/battery_capacity`
@@ -44,16 +46,16 @@ elif [ $BATTERY -le 10 ] && [ $CURRENT -le 0 ]; then
     rm -f /tmp/weather-crushed.png
     ping -c 5 www.microsoft.com
     if [ $? -ne 0 ]; then
-        eips 0 38 '------------- NO INTERNET CONNECTION -------------'
+        $EIPS 0 38 '------------- NO INTERNET CONNECTION -------------'
         exit
     fi
     ./weather-generator.sh
     if [ $? -ne 0 ]; then
-        eips 0 38 '------------ COULD NOT UPDATE WEATHER ------------'
+        $EIPS 0 38 '------------ COULD NOT UPDATE WEATHER ------------'
     else
-        eips -c
-        eips -c
-        eips -g /mnt/debian/tmp/weather-crushed.png
+        $EIPS -c
+        $EIPS -c
+        $EIPS -g /mnt/debian/tmp/weather-crushed.png
     fi
 else
     # Delete previously added flag
@@ -65,17 +67,17 @@ else
     ping -c 5 www.microsoft.com
     # For those living inside a wall, let's ping Microsoft instead of Google :D
     if [ $? -ne 0 ]; then
-        eips 0 38 '------------- NO INTERNET CONNECTION -------------'
+        $EIPS 0 38 '------------- NO INTERNET CONNECTION -------------'
         exit
     fi
     # Finally, let's get data and refresh
     ./weather-generator.sh
     if [ $? -ne 0 ]; then
-        eips 0 38 '------------ COULD NOT UPDATE WEATHER ------------'
+        $EIPS 0 38 '------------ COULD NOT UPDATE WEATHER ------------'
     else
         # Clear up the display
-        eips -c
-        eips -c
-        eips -g /mnt/debian/tmp/weather-crushed.png        
+        $EIPS -c
+        $EIPS -c
+        $EIPS -g /mnt/debian/tmp/weather-crushed.png        
     fi
 fi
